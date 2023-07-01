@@ -10,7 +10,7 @@ const WeatherDetails = ({ weatherData }) => {
     <div className='w-full flex justify-center text-white px-5'>
       <div className='w-full max-w-[550px] bg-slate-600/70 px-5 py-7 mt-14 rounded-lg'>
         {/* Location not found */}
-        {weatherData.cod === '404' ? <p>Location not found, Please enter valid location</p> :
+        {weatherData.cod == '404' || weatherData.cod == '400' ? <p>Location not found, Please enter valid location</p> :
           <>
             <div>Weather in {weatherData.name}</div>
             <div className='w-full flex flex-col item-center mt-5 sm:flex-row sm:gap-3'>
@@ -42,8 +42,6 @@ const WeatherDetails = ({ weatherData }) => {
                   </div>
                 </div>
               </div>
-
-
             </div>
           </>
         }

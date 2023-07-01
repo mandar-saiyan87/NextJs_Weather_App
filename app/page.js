@@ -33,6 +33,7 @@ const Home = () => {
     if (!isnum) {
       const response = await fetch(url)
       const weatherData = await response.json()
+      console.log(weatherData)
       setWeather(weatherData)
       setLocation('')
     } else {
