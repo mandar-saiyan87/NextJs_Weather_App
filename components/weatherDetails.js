@@ -9,6 +9,7 @@ const WeatherDetails = ({ weatherData }) => {
   return (
     <div className='w-full flex justify-center text-white px-5'>
       <div className='w-full max-w-[550px] bg-slate-600/70 px-5 py-7 mt-14 rounded-lg'>
+        {/* Location not found */}
         {weatherData.cod === '404' ? <p>Location not found, Please enter valid location</p> :
           <>
             <div>Weather in {weatherData.name}</div>
