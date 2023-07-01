@@ -15,13 +15,38 @@ const Home = () => {
 
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.NEXT_PUBLIC_KEY}&units=metric`
 
+  const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&appid=${process.env.NEXT_PUBLIC_KEY}&units=metric`
+
   const getWeather = async (e) => {
+    const isnum = /^\d+$/.test(location);
     e.preventDefault() // to prevent page reload
     setLoading(true)
-    const response = await fetch(url)
-    const weatherData = await response.json()
-    setWeather(weatherData)
-    setLocation('')
+    /* if pin code is entered there are few pin codes for which 
+      url is working and for few it is generating wrong results
+      Hence using url2 as well to search by pin codes
+      Below code checks if location string has only number and
+      try to get results from both urls.
+    */
+    if (!isnum) {
+      const response = await fetch(url)
+      const weatherData = await response.json()
+      setWeather(weatherData)
+      setLocation('')
+    } else {
+      const response = await fetch(url2)
+      const weatherData = await response.json()
+      console.log(weatherData)
+      if (weatherData.cod === '404') {
+        const response = await fetch(url)
+        const weatherData = await response.json()
+        console.log(weatherData)
+        setWeather(weatherData)
+        setLocation('')
+      } else {
+        setWeather(weatherData)
+        setLocation('')
+      }
+    }
     setLoading(false)
   }
 
@@ -77,3 +102,9 @@ export default Home;
 // } else { }
 
 // const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&appid=${process.env.NEXT_PUBLIC_KEY}&units=metric`
+
+// const response = await fetch(url)
+// const weatherData = await response.json()
+// setWeather(weatherData)
+// setLocation('')
+// setLoading(false)
