@@ -53,5 +53,3 @@ const WeatherDetails = ({ weatherData }) => {
 }
 
 export default WeatherDetails;
-
-// { weatherData.wind.speed * 1.609.toFixed(0) }

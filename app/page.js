@@ -13,10 +13,13 @@ const Home = () => {
   const [weather, setWeather] = useState({})
   const [loading, setLoading] = useState(false)
 
+  /* For location string by name*/
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.NEXT_PUBLIC_KEY}&units=metric`
 
+  /* If searched by pin code */
   const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&appid=${process.env.NEXT_PUBLIC_KEY}&units=metric`
 
+  /* Function to fetch data from API */
   const getWeather = async (e) => {
     const isnum = /^\d+$/.test(location);
     e.preventDefault() // to prevent page reload
@@ -89,22 +92,3 @@ const Home = () => {
 export default Home;
 
 
-// let isnum = /^\d+$/.test(location);
-// if (isnum) {
-//   const response = await fetch(url2)
-//   const weatherData = await response.json()
-//   if (weatherData.cod == '404') {
-//     const response = await fetch(url)
-//     const weatherData = await response.json()
-//     setWeather(weatherData)
-//     setLocation('')
-//   }
-// } else { }
-
-// const url2 = `https://api.openweathermap.org/data/2.5/weather?zip=${location}&appid=${process.env.NEXT_PUBLIC_KEY}&units=metric`
-
-// const response = await fetch(url)
-// const weatherData = await response.json()
-// setWeather(weatherData)
-// setLocation('')
-// setLoading(false)
